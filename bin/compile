@@ -416,8 +416,8 @@ setupGOPATH() {
 
 fetchTensorflow() {
     wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.13.1.tar.gz
-    tar -C /usr/local -xzf libtensorflow-cpu-linux-x86_64-1.13.1.tar.gz 
-    ldconfig
+    tar -C ./vendor/github.com/tensorflow/tensorflow/tensorflow/c -xzf libtensorflow-cpu-linux-x86_64-1.12.0.tar.gz,
+    export LD_LIBRARY_PATH=${PWD}/vendor/github.com/tensorflow/tensorflow/tensorflow/c/lib
 }
 
 installPkgs() {

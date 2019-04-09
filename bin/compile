@@ -419,6 +419,9 @@ fetchTensorflow() {
     tar -C ./vendor/github.com/tensorflow/tensorflow/tensorflow/c -xzf libtensorflow-cpu-linux-x86_64-1.13.1.tar.gz
     export LD_LIBRARY_PATH=${PWD}/vendor/github.com/tensorflow/tensorflow/tensorflow/c/lib
     export LIBRARY_PATH=${PWD}/vendor/github.com/tensorflow/tensorflow/tensorflow/c/lib
+
+    echo "ld librarypath: ${LD_LIBRARY_PATH}"
+    echo "llib path: ${LIBRARY_PATH}"
 }
 
 installPkgs() {

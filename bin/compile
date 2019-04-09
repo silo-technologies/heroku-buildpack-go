@@ -414,6 +414,12 @@ setupGOPATH() {
     echo "src=${src}"
 }
 
+fetchTensorflow() {
+    wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.13.1.tar.gz
+    tar -C /usr/local -xzf libtensorflow-cpu-linux-x86_64-1.13.1.tar.gz 
+    ldconfig
+}
+
 installPkgs() {
     step "Running: go install -v ${FLAGS[@]} ${pkgs}"
     go install -v "${FLAGS[@]}" ${pkgs} 2>&1
@@ -560,6 +566,8 @@ case "${TOOL}" in
             bin/go-pre-compile
         fi
 
+        fetchTensorflow
+
         installPkgs
 
         if [[ -f bin/go-post-compile ]]; then
@@ -588,6 +596,8 @@ case "${TOOL}" in
             dep ensure
         fi
         massagePkgSpecForVendor
+
+        fetchTensorflow
 
         installPkgs
     ;;
@@ -628,6 +638,7 @@ case "${TOOL}" in
             godep go install -v "${FLAGS[@]}" ${pkgs} 2>&1
         else
             massagePkgSpecForVendor
+            fetchTensorflow
             installPkgs
         fi
     ;;
@@ -649,6 +660,8 @@ case "${TOOL}" in
             govendor sync
         fi
         massagePkgSpecForVendor
+
+        fetchTensorflow
 
         installPkgs
     ;;
@@ -674,6 +687,8 @@ case "${TOOL}" in
         fi
 
         massagePkgSpecForVendor
+
+        fetchTensorflow
 
         installPkgs
     ;;
@@ -751,3 +766,10 @@ if [ "${TOOL}" != "gb" ]; then
     echo "NAME=${name}" >> "${t}"
 fi
 
+_newOrUpdatedBinFiles=$(binDiff)
+info ""
+info "Installed the following binaries:"
+for fyle in ${_newOrUpdatedBinFiles}; do
+  info "\t\t${fyle}"
+done
+info ""

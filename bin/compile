@@ -422,6 +422,7 @@ fetchTensorflow() {
 
     echo "ld librarypath: ${LD_LIBRARY_PATH}"
     echo "llib path: ${LIBRARY_PATH}"
+    ls $LD_LIBRARY_PATH 
 }
 
 installPkgs() {

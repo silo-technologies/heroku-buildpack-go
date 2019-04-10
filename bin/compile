@@ -571,6 +571,7 @@ case "${TOOL}" in
             bin/go-pre-compile
         fi
 
+        echo "Fetching tensorflow...."
         fetchTensorflow
 
         installPkgs
